@@ -66,7 +66,7 @@ public class MainActivity extends FragmentActivity {
                 switchFragment(new FirstFragment()).commit();
                 break;
             case R.id.tvChe:
-                switchFragment(new SecondFragment()).commit();
+                switchFragment(new WorkShopFragment()).commit();
                 break;
             case R.id.tvRenJi:
                 switchFragment(new ThirdFragment()).commit();
