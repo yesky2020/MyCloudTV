@@ -78,6 +78,16 @@
             android:text="人机达成"
             android:textSize="@dimen/textSubTitle"
             android:textColor="@color/white" />
+        <TextView
+            android:id="@+id/tvExit"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:ems="1"
+            android:gravity="center"
+            android:text="系统注销"
+            android:textSize="@dimen/textSubTitle"
+            android:textColor="@color/white" />
     </LinearLayout>
 
     <FrameLayout

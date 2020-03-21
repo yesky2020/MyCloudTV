@@ -9,12 +9,14 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends FragmentActivity {
-
+    @BindView(R.id.tvExit)
+    TextView tvExit;
     @BindView(R.id.topLayout)
     LinearLayout topLayout;
     @BindView(R.id.tvPai)
@@ -28,6 +30,9 @@ public class MainActivity extends FragmentActivity {
     @BindView(R.id.fragmentLayout)
     FrameLayout fragmentLayout;
 
+
+    private Fragment currentFragment = new Fragment();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,10 +40,7 @@ public class MainActivity extends FragmentActivity {
         ButterKnife.bind(this);
     }
 
-    private Fragment currentFragment = new Fragment();
-
     private FragmentTransaction switchFragment(Fragment targetFragment) {
-
         FragmentTransaction transaction = getSupportFragmentManager()
                 .beginTransaction();
         if (!targetFragment.isAdded()) {
@@ -47,7 +49,6 @@ public class MainActivity extends FragmentActivity {
                 transaction.hide(currentFragment);
             }
             transaction.add(R.id.fragmentLayout, targetFragment, targetFragment.getClass().getName());
-
         } else {
             transaction
                     .hide(currentFragment)
@@ -59,7 +60,7 @@ public class MainActivity extends FragmentActivity {
         return transaction;
     }
 
-    @OnClick({R.id.tvPai, R.id.tvChe, R.id.tvRenJi})
+    @OnClick({R.id.tvPai, R.id.tvChe, R.id.tvRenJi, R.id.tvExit})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tvPai:
@@ -70,6 +71,9 @@ public class MainActivity extends FragmentActivity {
                 break;
             case R.id.tvRenJi:
                 switchFragment(new ThirdFragment()).commit();
+                break;
+            case R.id.tvExit:
+                switchFragment(new ExitFragment()).commit();
                 break;
         }
     }
