@@ -23,22 +23,28 @@
 
 
             <EditText
-                android:id="@+id/jiayun_name_tv"
+                android:id="@+id/jiayun_name_et"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
                 android:ellipsize="end"
                 android:textSize="18sp"
-                android:hint="@string/str_input_name" />
+                android:hint="@string/str_input_name"
+                android:inputType="phone"
+                android:text="13713917858"
+                android:autofillHints="" />
 
             <EditText
-                android:id="@+id/jiayun_psw"
+                android:id="@+id/jiayun_psw_et"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
                 android:ellipsize="end"
                 android:textSize="18sp"
-                android:hint="@string/str_input_psd" />
+                android:inputType="text"
+                android:text="1828"
+                android:hint="@string/str_input_psd"
+                android:autofillHints=""/>
 
             <TextView
                 android:id="@+id/jiayun_login"
