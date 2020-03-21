@@ -98,26 +98,30 @@ public class LoginActivity extends FragmentActivity {
 
                     @Override
                     public void onSuccess(String s) {
-                        isNetFinsh = true;
-                        Gson gson = new Gson();
-                        UserBean userBean = gson.fromJson(s, UserBean.class);
-                        if (null != userBean && "ok".equals(userBean.code.toLowerCase())) {
-                            MyApplication.getInstance().setUserName(name);
-                            MyApplication.getInstance().setUserInfo(userBean);
-                            LoginInfo loginInfo = new LoginInfo();
-                            loginInfo.password = psw;
-                            loginInfo.userName = name;
-                            ACache.get(LoginActivity.this).put(Constant.CACHE_NAME_PSD, loginInfo);
-                            LoginActivity.this.finish();
-                            Intent intent = new Intent(LoginActivity.this, com.example.mycloudtv.MainActivity.class);
-                            startActivity(intent);
-                            ThreadManager.getThreadPool().execute(new Runnable() {
-                                @Override
-                                public void run() {
-                                    ACache.get(MyApplication.getInstance().getApplicationContext()).put(name, userBean);
-                                }
-                            });
-                        } else {
+                        try {
+                            isNetFinsh = true;
+                            Gson gson = new Gson();
+                            UserBean userBean = gson.fromJson(s, UserBean.class);
+                            if (null != userBean && "ok".equals(userBean.code.toLowerCase())) {
+                                MyApplication.getInstance().setUserName(name);
+                                MyApplication.getInstance().setUserInfo(userBean);
+                                LoginInfo loginInfo = new LoginInfo();
+                                loginInfo.password = psw;
+                                loginInfo.userName = name;
+                                ACache.get(LoginActivity.this).put(Constant.CACHE_NAME_PSD, loginInfo);
+                                LoginActivity.this.finish();
+                                Intent intent = new Intent(LoginActivity.this, com.example.mycloudtv.MainActivity.class);
+                                startActivity(intent);
+                                ThreadManager.getThreadPool().execute(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        ACache.get(MyApplication.getInstance().getApplicationContext()).put(name, userBean);
+                                    }
+                                });
+                            } else {
+                                Toast.makeText(LoginActivity.this, R.string.str_network_excption, 500).show();
+                            }
+                        } catch (Exception e) {
                             Toast.makeText(LoginActivity.this, R.string.str_network_excption, 500).show();
                         }
                     }

@@ -1,5 +1,6 @@
 package com.example.mycloudtv;
 
+import android.annotation.SuppressLint;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Display;
@@ -7,16 +8,27 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-
-import com.example.mycloudtv.dialog.WebDialog;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
+
+import com.example.mycloudtv.bean.VersionBean;
+import com.example.mycloudtv.dialog.WebDialog;
+import com.example.mycloudtv.util.Constant;
+import com.google.gson.Gson;
+import com.zhouyou.http.EasyHttp;
+import com.zhouyou.http.callback.SimpleCallBack;
+import com.zhouyou.http.exception.ApiException;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
+@SuppressLint("WrongConstant")
 public class MainActivity extends FragmentActivity {
     @BindView(R.id.topLayout)
     LinearLayout topLayout;
@@ -51,6 +63,7 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        checkVersion();
     }
 
     private FragmentTransaction switchFragment(Fragment targetFragment) {
@@ -66,8 +79,6 @@ public class MainActivity extends FragmentActivity {
             transaction
                     .hide(currentFragment)
                     .show(targetFragment);
-
-
         }
         currentFragment = targetFragment;
         return transaction;
@@ -137,6 +148,37 @@ public class MainActivity extends FragmentActivity {
                 viewExit.setVisibility(View.VISIBLE);
                 break;
         }
+    }
+
+    private void checkVersion() {
+        String url = "/plat/andtv/checkVersion";
+        EasyHttp.get(url).baseUrl("https://m.danfoo.com")
+                .readTimeOut(10 * 1000)//局部定义读超时
+                .writeTimeOut(10 * 1000)
+                .connectTimeout(10 * 1000)
+                .timeStamp(true)
+                .execute(new SimpleCallBack<String>() {
+                    @Override
+                    public void onError(ApiException e) {
+                    }
+
+                    @Override
+                    public void onSuccess(String s) {
+                        try {
+                            Gson gson = new Gson();
+                            VersionBean versionBean = gson.fromJson(s, VersionBean.class);
+                            if (null != versionBean && null != versionBean.data && null != versionBean.data.dictionary_value) {
+                                Pattern pattern = Pattern.compile("-?[0-9]+.?[0-9]+");
+                                Matcher isNum = pattern.matcher(versionBean.data.dictionary_value);
+                                if (isNum.matches() && Constant.APP_VERSION < Integer.parseInt(versionBean.data.id)) {
+                                    Toast.makeText(MainActivity.this, "升级", 500).show();
+                                }
+                            }
+                        } catch (Exception e) {
+
+                        }
+                    }
+                });
     }
 
 }

@@ -23,7 +23,6 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         singleInstance = this;
-
         // 使用参考 https://github.com/zhou-you/RxEasyHttp
         EasyHttp.init(this);//默认初始化,必须调用
         //全局设置请求头
