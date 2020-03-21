@@ -7,5 +7,6 @@
     <string name="str_input_detail">机加云 - 机床聯網, 車間上雲</string>
     <string name="str_network_excption">網絡異常,請重試!</string>
     <string name="str_login_excption">登錄失敗,請重試!</string>
+    <string name="str_exit_btn">注銷</string>
 </resources>
 

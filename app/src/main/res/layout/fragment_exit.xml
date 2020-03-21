@@ -2,14 +2,29 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     android:background="@color/red"
+    android:gravity="center"
     android:orientation="vertical">
 
-
     <TextView
+        android:id="@+id/jiayun_exti_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="第4个fragment"/>
+        android:singleLine="true"
+        android:text="@string/str_input_detail"
+        android:textSize="36sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/jiayun_exit_btn"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:singleLine="true"
+        android:text="@string/str_exit_btn"
+        android:textColor="#ffffff"
+        android:textSize="20sp" />
+
 </LinearLayout>
