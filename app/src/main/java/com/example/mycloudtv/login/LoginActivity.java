@@ -98,6 +98,7 @@ public class LoginActivity extends FragmentActivity {
 
                     @Override
                     public void onSuccess(String s) {
+                        isNetFinsh = true;
                         Gson gson = new Gson();
                         UserBean userBean = gson.fromJson(s, UserBean.class);
                         if (null != userBean && "ok".equals(userBean.code.toLowerCase())) {
