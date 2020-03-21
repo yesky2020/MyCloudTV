@@ -1,14 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".login.LoginActivity">
-    <TextView
-        android:id="@+id/tvLogin"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:text="登录"/>
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_centerInParent="true"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/jiayun_detail_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="@string/str_input_detail"
+                android:textSize="36sp"
+                android:textStyle="bold"/>
+
+
+            <EditText
+                android:id="@+id/jiayun_name_tv"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:textSize="18sp"
+                android:hint="@string/str_input_name" />
+
+            <EditText
+                android:id="@+id/jiayun_psw"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:textSize="18sp"
+                android:hint="@string/str_input_psd" />
+
+            <TextView
+                android:id="@+id/jiayun_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:text="@string/str_input_loging"/>
+
+        </LinearLayout>
+</RelativeLayout>
