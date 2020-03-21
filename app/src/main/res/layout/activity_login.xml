@@ -34,7 +34,6 @@
                 android:layout_marginTop="30dp"
                 android:hint="@string/str_input_name"
                 android:inputType="phone"
-                android:text="13713917858"
                 android:gravity="center"
                 android:textColor="#ffffff"
                 android:background="@drawable/password_shape"
@@ -52,7 +51,6 @@
                 android:inputType="text"
                 android:textColor="#ffffff"
                 android:background="@drawable/password_shape"
-                android:text="1828"
                 android:hint="@string/str_input_psd"
                 android:autofillHints=""/>
 

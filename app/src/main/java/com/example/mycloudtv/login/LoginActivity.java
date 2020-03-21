@@ -15,7 +15,9 @@ import androidx.fragment.app.FragmentActivity;
 import com.example.mycloudtv.MyApplication;
 import com.example.mycloudtv.R;
 import com.example.mycloudtv.acache.ACache;
+import com.example.mycloudtv.bean.LoginInfo;
 import com.example.mycloudtv.bean.UserBean;
+import com.example.mycloudtv.util.Constant;
 import com.example.mycloudtv.util.ThreadManager;
 import com.google.gson.Gson;
 import com.zhouyou.http.EasyHttp;
@@ -42,6 +44,12 @@ public class LoginActivity extends FragmentActivity {
         tvLogin = findViewById(R.id.jiayun_login);
         etName = findViewById(R.id.jiayun_name_et);
         etPsw = findViewById(R.id.jiayun_psw_et);
+        LoginInfo loginInfo = (LoginInfo) ACache.get(LoginActivity.this).getAsObject(Constant.CACHE_NAME_PSD);
+        if (null != loginInfo) {
+            etName.setText(loginInfo.userName);
+            etPsw.setText(loginInfo.password);
+            jiayunLogin();
+        }
     }
 
     public void initListener() {
@@ -95,15 +103,19 @@ public class LoginActivity extends FragmentActivity {
                         if (null != userBean && "ok".equals(userBean.code.toLowerCase())) {
                             MyApplication.getInstance().setUserName(name);
                             MyApplication.getInstance().setUserInfo(userBean);
+                            LoginInfo loginInfo = new LoginInfo();
+                            loginInfo.password = psw;
+                            loginInfo.userName = name;
+                            ACache.get(LoginActivity.this).put(Constant.CACHE_NAME_PSD, loginInfo);
+                            LoginActivity.this.finish();
                             Intent intent = new Intent(LoginActivity.this, com.example.mycloudtv.MainActivity.class);
                             startActivity(intent);
                             ThreadManager.getThreadPool().execute(new Runnable() {
                                 @Override
                                 public void run() {
-                                    ACache.get(LoginActivity.this).put(name, userBean);
+                                    ACache.get(MyApplication.getInstance().getApplicationContext()).put(name, userBean);
                                 }
                             });
-                            LoginActivity.this.finish();
                         } else {
                             Toast.makeText(LoginActivity.this, R.string.str_network_excption, 500).show();
                         }

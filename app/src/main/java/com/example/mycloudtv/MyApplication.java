@@ -12,7 +12,7 @@ import com.zhouyou.http.model.HttpParams;
 
 public class MyApplication extends Application {
     private UserBean userBean;
-    public String userName;
+    private String userName;
     private static MyApplication singleInstance;
 
     public static MyApplication getInstance() {

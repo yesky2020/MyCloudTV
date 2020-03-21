@@ -13,8 +13,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.mycloudtv.acache.ACache;
-import com.example.mycloudtv.bean.UserBean;
 import com.example.mycloudtv.login.LoginActivity;
+import com.example.mycloudtv.util.Constant;
 
 public class ExitFragment extends Fragment {
     private View view;
@@ -43,6 +43,7 @@ public class ExitFragment extends Fragment {
         exitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ACache.get(activity).remove(Constant.CACHE_NAME_PSD);
                 Intent intent = new Intent(activity, LoginActivity.class);
                 startActivity(intent);
                 activity.finish();
