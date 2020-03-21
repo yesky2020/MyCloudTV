@@ -1,10 +1,15 @@
 package com.example.mycloudtv;
 
+import android.graphics.Point;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.example.mycloudtv.dialog.WebDialog;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -33,6 +38,7 @@ public class MainActivity extends FragmentActivity {
 
     private Fragment currentFragment = new Fragment();
 
+    WebDialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +71,7 @@ public class MainActivity extends FragmentActivity {
         switch (view.getId()) {
             case R.id.tvPai:
                 switchFragment(new FirstFragment()).commit();
+                showWebDialog();
                 break;
             case R.id.tvChe:
                 switchFragment(new WorkShopFragment()).commit();
@@ -76,5 +83,21 @@ public class MainActivity extends FragmentActivity {
                 switchFragment(new ExitFragment()).commit();
                 break;
         }
+    }
+
+    private void showWebDialog() {
+        dialog =new WebDialog(MainActivity.this);
+        dialog.show();
+        //获取dialog布局
+        WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
+        //获取屏幕的宽高
+        Point point = new Point();
+        Display display = this.getWindowManager().getDefaultDisplay();
+        display.getSize(point);
+        //给dialog设置宽高
+        params.width = (int) (point.x * 0.7);
+        params.height = (int) (point.y * 0.7);
+        //使设置生效
+        dialog.getWindow().setAttributes(params);
     }
 }
