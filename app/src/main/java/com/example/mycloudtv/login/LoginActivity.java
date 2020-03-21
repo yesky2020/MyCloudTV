@@ -13,7 +13,6 @@ import android.widget.Toast;
 import androidx.fragment.app.FragmentActivity;
 
 import com.example.mycloudtv.R;
-import com.example.mycloudtv.acache.ACache;
 import com.example.mycloudtv.bean.UserBean;
 import com.zhouyou.http.EasyHttp;
 import com.zhouyou.http.callback.SimpleCallBack;
@@ -77,7 +76,7 @@ public class LoginActivity extends FragmentActivity {
                 .writeTimeOut(10 * 1000)
                 .connectTimeout(10 * 1000)
                 .timeStamp(true)
-                .execute(new SimpleCallBack<String>() {
+                .execute(new SimpleCallBack<UserBean>() {
                     @Override
                     public void onError(ApiException e) {
                         isNetFinsh = true;
@@ -88,14 +87,13 @@ public class LoginActivity extends FragmentActivity {
                     }
 
                     @Override
-                    public void onSuccess(String s) {
+                    public void onSuccess(UserBean userBean) {
                         isNetFinsh = true;
                         if (LoginActivity.this.isDestroyed()) {
                             return;
                         }
                         try {
-                            String code = new JSONObject(s).optString("code");
-                            if (!TextUtils.isEmpty(code) && "ok".equals(code.toLowerCase())) {
+                            if (null != userBean) {
                                 Intent intent = new Intent(LoginActivity.this, com.example.mycloudtv.MainActivity.class);
                                 startActivity(intent);
                                 LoginActivity.this.finish();
@@ -105,7 +103,6 @@ public class LoginActivity extends FragmentActivity {
                         } catch (Exception e) {
                             Toast.makeText(LoginActivity.this, R.string.str_login_excption, 500).show();
                         }
-
                     }
                 });
     }
