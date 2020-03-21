@@ -96,6 +96,7 @@ public class LoginActivity extends FragmentActivity {
                             if (!TextUtils.isEmpty(code) && "ok".equals(code.toLowerCase())) {
                                 Intent intent = new Intent(LoginActivity.this, com.example.mycloudtv.MainActivity.class);
                                 startActivity(intent);
+                                LoginActivity.this.finish();
                             } else {
                                 Toast.makeText(LoginActivity.this, R.string.str_login_excption, 500).show();
                             }
