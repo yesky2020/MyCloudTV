@@ -2,6 +2,7 @@ package com.example.mycloudtv;
 
 import android.app.Application;
 
+import com.example.mycloudtv.bean.UserBean;
 import com.zhouyou.http.EasyHttp;
 import com.zhouyou.http.cache.converter.SerializableDiskConverter;
 import com.zhouyou.http.cache.model.CacheMode;
@@ -9,6 +10,7 @@ import com.zhouyou.http.model.HttpHeaders;
 import com.zhouyou.http.model.HttpParams;
 
 public class MyApplication extends Application {
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -55,24 +57,30 @@ public class MyApplication extends Application {
                 .setCacheMaxSize(100 * 1024 * 1024)//设置缓存大小为100M
                 //设置缓存版本，如果缓存有变化，修改版本后，缓存就不会被加载。特别是用于版本重大升级时缓存不能使用的情况
                 .setCacheVersion(1);//缓存版本为1
-                //.setHttpCache(new Cache())//设置Okhttp缓存，在缓存模式为DEFAULT才起作用
+        //.setHttpCache(new Cache())//设置Okhttp缓存，在缓存模式为DEFAULT才起作用
 
-                //可以设置https的证书,以下几种方案根据需要自己设置
+        //可以设置https的证书,以下几种方案根据需要自己设置
 //                .setCertificates()                                  //方法一：信任所有证书,不安全有风险
-                //.setCertificates(new SafeTrustManager())            //方法二：自定义信任规则，校验服务端证书
-                //配置https的域名匹配规则，不需要就不要加入，使用不当会导致https握手失败
-                //.setHostnameVerifier(new SafeHostnameVerifier())
-                //.addConverterFactory(GsonConverterFactory.create(gson))//本框架没有采用Retrofit的Gson转化，所以不用配置
+        //.setCertificates(new SafeTrustManager())            //方法二：自定义信任规则，校验服务端证书
+        //配置https的域名匹配规则，不需要就不要加入，使用不当会导致https握手失败
+        //.setHostnameVerifier(new SafeHostnameVerifier())
+        //.addConverterFactory(GsonConverterFactory.create(gson))//本框架没有采用Retrofit的Gson转化，所以不用配置
 //                .addCommonHeaders(headers)//设置全局公共头
 //                .addCommonParams(params)//设置全局公共参数
-                //.addNetworkInterceptor(new NoCacheInterceptor())//设置网络拦截器
-                //.setCallFactory()//局设置Retrofit对象Factory
-                //.setCookieStore()//设置cookie
-                //.setOkproxy()//设置全局代理
-                //.setOkconnectionPool()//设置请求连接池
-                //.setCallbackExecutor()//全局设置Retrofit callbackExecutor
-                //可以添加全局拦截器，不需要就不要加入，错误写法直接导致任何回调不执行
-                //.addInterceptor(new GzipRequestInterceptor())//开启post数据进行gzip后发送给服务器
+        //.addNetworkInterceptor(new NoCacheInterceptor())//设置网络拦截器
+        //.setCallFactory()//局设置Retrofit对象Factory
+        //.setCookieStore()//设置cookie
+        //.setOkproxy()//设置全局代理
+        //.setOkconnectionPool()//设置请求连接池
+        //.setCallbackExecutor()//全局设置Retrofit callbackExecutor
+        //可以添加全局拦截器，不需要就不要加入，错误写法直接导致任何回调不执行
+        //.addInterceptor(new GzipRequestInterceptor())//开启post数据进行gzip后发送给服务器
 //                .addInterceptor(new CustomSignInterceptor());//添加参数签名拦截器
+    }
+
+    public UserBean getUserInfo() {
+        UserBean userBean = new UserBean();
+
+        return userBean;
     }
 }

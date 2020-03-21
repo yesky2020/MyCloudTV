@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".login.LoginActivity">
+    tools:context=".login.LoginActivity"
+    android:background="#0A2B38">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -19,40 +20,53 @@
                 android:singleLine="true"
                 android:text="@string/str_input_detail"
                 android:textSize="36sp"
+                android:textColor="#66FBFD"
                 android:textStyle="bold"/>
 
 
             <EditText
                 android:id="@+id/jiayun_name_et"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
+                android:layout_width="220dp"
+                android:layout_height="40dp"
                 android:singleLine="true"
                 android:ellipsize="end"
-                android:textSize="18sp"
+                android:textSize="16sp"
+                android:layout_marginTop="30dp"
                 android:hint="@string/str_input_name"
                 android:inputType="phone"
                 android:text="13713917858"
+                android:gravity="center"
+                android:textColor="#ffffff"
+                android:background="@drawable/password_shape"
                 android:autofillHints="" />
 
             <EditText
                 android:id="@+id/jiayun_psw_et"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
+                android:layout_width="220dp"
+                android:layout_height="40dp"
                 android:singleLine="true"
                 android:ellipsize="end"
-                android:textSize="18sp"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:textSize="16sp"
                 android:inputType="text"
+                android:textColor="#ffffff"
+                android:background="@drawable/password_shape"
                 android:text="1828"
                 android:hint="@string/str_input_psd"
                 android:autofillHints=""/>
 
             <TextView
                 android:id="@+id/jiayun_login"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="22sp"
+                android:layout_width="220dp"
+                android:layout_height="40dp"
+                android:textSize="16sp"
                 android:textStyle="bold"
-                android:text="@string/str_input_loging"/>
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="@string/str_input_loging"
+                android:background="@drawable/button_shape"
+                android:textColor="#FFFFFF"/>
 
         </LinearLayout>
 </RelativeLayout>

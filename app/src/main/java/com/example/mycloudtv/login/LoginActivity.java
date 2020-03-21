@@ -13,6 +13,8 @@ import android.widget.Toast;
 import androidx.fragment.app.FragmentActivity;
 
 import com.example.mycloudtv.R;
+import com.example.mycloudtv.acache.ACache;
+import com.example.mycloudtv.bean.UserBean;
 import com.zhouyou.http.EasyHttp;
 import com.zhouyou.http.callback.SimpleCallBack;
 import com.zhouyou.http.exception.ApiException;
