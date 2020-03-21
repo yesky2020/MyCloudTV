@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.mycloudtv.acache.ACache;
+import com.example.mycloudtv.bean.UserBean;
 import com.example.mycloudtv.login.LoginActivity;
 
 public class ExitFragment extends Fragment {

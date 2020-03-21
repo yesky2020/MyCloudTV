@@ -12,15 +12,15 @@ import android.widget.Toast;
 
 import androidx.fragment.app.FragmentActivity;
 
+import com.example.mycloudtv.MyApplication;
 import com.example.mycloudtv.R;
+import com.example.mycloudtv.acache.ACache;
 import com.example.mycloudtv.bean.UserBean;
-import com.example.mycloudtv.bean.UserBean1;
+import com.example.mycloudtv.util.ThreadManager;
 import com.google.gson.Gson;
 import com.zhouyou.http.EasyHttp;
 import com.zhouyou.http.callback.SimpleCallBack;
 import com.zhouyou.http.exception.ApiException;
-
-import org.json.JSONObject;
 
 @SuppressLint("WrongConstant")
 public class LoginActivity extends FragmentActivity {
@@ -79,54 +79,35 @@ public class LoginActivity extends FragmentActivity {
                 .connectTimeout(10 * 1000)
                 .timeStamp(true)
                 .execute(new SimpleCallBack<String>() {
-            @Override
-            public void onError(ApiException e) {
+                    @Override
+                    public void onError(ApiException e) {
+                        isNetFinsh = true;
+                        if (LoginActivity.this.isDestroyed()) {
+                            return;
+                        }
+                        Toast.makeText(LoginActivity.this, R.string.str_network_excption, 500).show();
+                    }
 
-            }
-
-            @Override
-            public void onSuccess(String s) {
-                Gson gson = new Gson();
-                UserBean1 userBean1 =gson.fromJson(s,UserBean1.class);
-                if(null!=userBean1.getData()){
-                    Intent intent = new Intent(LoginActivity.this, com.example.mycloudtv.MainActivity.class);
-                    startActivity(intent);
-                    LoginActivity.this.finish();
-                }else {
-                    Toast.makeText(LoginActivity.this, R.string.str_network_excption, 500).show();
-
-                }
-                String ss = s;
-            }
-        });
-//                .execute(new SimpleCallBack<UserBean>() {
-//                    @Override
-//                    public void onError(ApiException e) {
-//                        isNetFinsh = true;
-//                        if (LoginActivity.this.isDestroyed()) {
-//                            return;
-//                        }
-//                        Toast.makeText(LoginActivity.this, R.string.str_network_excption, 500).show();
-//                    }
-//
-//                    @Override
-//                    public void onSuccess(UserBean userBean) {
-//                        isNetFinsh = true;
-//                        if (LoginActivity.this.isDestroyed()) {
-//                            return;
-//                        }
-//                        try {
-//                            if (null != userBean) {
-//                                Intent intent = new Intent(LoginActivity.this, com.example.mycloudtv.MainActivity.class);
-//                                startActivity(intent);
-//                                LoginActivity.this.finish();
-//                            } else {
-//                                Toast.makeText(LoginActivity.this, R.string.str_login_excption, 500).show();
-//                            }
-//                        } catch (Exception e) {
-//                            Toast.makeText(LoginActivity.this, R.string.str_login_excption, 500).show();
-//                        }
-//                    }
-//                });
+                    @Override
+                    public void onSuccess(String s) {
+                        Gson gson = new Gson();
+                        UserBean userBean = gson.fromJson(s, UserBean.class);
+                        if (null != userBean && "ok".equals(userBean.code.toLowerCase())) {
+                            MyApplication.getInstance().setUserName(name);
+                            MyApplication.getInstance().setUserInfo(userBean);
+                            Intent intent = new Intent(LoginActivity.this, com.example.mycloudtv.MainActivity.class);
+                            startActivity(intent);
+                            ThreadManager.getThreadPool().execute(new Runnable() {
+                                @Override
+                                public void run() {
+                                    ACache.get(LoginActivity.this).put(name, userBean);
+                                }
+                            });
+                            LoginActivity.this.finish();
+                        } else {
+                            Toast.makeText(LoginActivity.this, R.string.str_network_excption, 500).show();
+                        }
+                    }
+                });
     }
 }

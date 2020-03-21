@@ -2,6 +2,7 @@ package com.example.mycloudtv;
 
 import android.app.Application;
 
+import com.example.mycloudtv.acache.ACache;
 import com.example.mycloudtv.bean.UserBean;
 import com.zhouyou.http.EasyHttp;
 import com.zhouyou.http.cache.converter.SerializableDiskConverter;
@@ -10,13 +11,21 @@ import com.zhouyou.http.model.HttpHeaders;
 import com.zhouyou.http.model.HttpParams;
 
 public class MyApplication extends Application {
+    private UserBean userBean;
+    public String userName;
+    private static MyApplication singleInstance;
+
+    public static MyApplication getInstance() {
+        return singleInstance;
+    }
 
     @Override
     public void onCreate() {
         super.onCreate();
+        singleInstance = this;
+
         // 使用参考 https://github.com/zhou-you/RxEasyHttp
         EasyHttp.init(this);//默认初始化,必须调用
-
         //全局设置请求头
         HttpHeaders headers = new HttpHeaders();
 //        headers.put("User-Agent", SystemInfoUtils.getUserAgent(this, AppConstant.APPID));
@@ -79,8 +88,25 @@ public class MyApplication extends Application {
     }
 
     public UserBean getUserInfo() {
-        UserBean userBean = new UserBean();
-
+        if (null != userBean) {
+            return userBean;
+        } else {
+            this.userBean = (UserBean) ACache.get(this).getAsObject(userName);
+        }
         return userBean;
+    }
+
+    public void setUserInfo(UserBean userBean) {
+        if (null != userBean && "ok".equals(userBean.code.toLowerCase())) {
+            this.userBean = userBean;
+        }
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserName() {
+        return this.userName;
     }
 }
