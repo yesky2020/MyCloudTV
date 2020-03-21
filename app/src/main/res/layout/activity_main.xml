@@ -26,8 +26,8 @@
             android:layout_weight="1"
             android:gravity="center_horizontal"
             android:text="金畅兴-机加云工业互联网"
-            android:textSize="@dimen/textTitle"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textSize="@dimen/textTitle" />
 
         <TextView
             android:layout_width="80dp"
@@ -44,56 +44,133 @@
         android:layout_height="match_parent"
         android:layout_below="@id/topLayout"
         android:gravity="center_horizontal"
+        android:focusable="false"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tvPai"
+        <LinearLayout
+            android:id="@+id/llPai"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:ems="1"
-            android:text="排班管理"
-            android:textSize="@dimen/textSubTitle"
-            android:gravity="center"
-            android:textColor="@color/white" />
+            android:focusable="true"
+            android:nextFocusDown="@id/llChe"
+            android:nextFocusRight="@id/fragmentLayout"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/tvChe"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:ems="1"
-            android:gravity="center"
-            android:text="车间全局"
-            android:textSize="@dimen/textSubTitle"
-            android:textColor="@color/white" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:ems="1"
+                android:gravity="center"
+                android:text="排班管理"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSubTitle" />
 
-        <TextView
-            android:id="@+id/tvRenJi"
+            <View
+                android:id="@+id/viewPai"
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:background="@color/white"
+                android:visibility="visible" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llChe"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:ems="1"
-            android:gravity="center"
-            android:text="人机达成"
-            android:textSize="@dimen/textSubTitle"
-            android:textColor="@color/white" />
-        <TextView
-            android:id="@+id/tvExit"
+            android:focusable="true"
+            android:nextFocusUp="@id/llPai"
+            android:nextFocusDown="@id/llRenJi"
+            android:nextFocusRight="@id/fragmentLayout"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:ems="1"
+                android:gravity="center"
+                android:text="车间全局"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSubTitle" />
+
+            <View
+                android:id="@+id/viewChe"
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:background="@color/white"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llRenJi"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:ems="1"
-            android:gravity="center"
-            android:text="系统注销"
-            android:textSize="@dimen/textSubTitle"
-            android:textColor="@color/white" />
+            android:focusable="true"
+            android:nextFocusUp="@id/llChe"
+            android:nextFocusDown="@id/llExit"
+            android:nextFocusRight="@id/fragmentLayout"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:ems="1"
+                android:gravity="center"
+                android:text="人机达成"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSubTitle" />
+
+            <View
+                android:id="@+id/viewRenJi"
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:background="@color/white"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llExit"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:focusable="true"
+            android:nextFocusUp="@id/llRenJi"
+            android:nextFocusRight="@id/fragmentLayout"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:ems="1"
+                android:gravity="center"
+                android:text="系统注销"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSubTitle" />
+
+            <View
+                android:id="@+id/viewExit"
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:background="@color/white"
+                android:visibility="invisible" />
+        </LinearLayout>
     </LinearLayout>
 
     <FrameLayout
         android:id="@+id/fragmentLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:nextFocusLeft="@id/llPai"
         android:layout_below="@id/topLayout"
         android:layout_toRightOf="@id/leftLayout"
         android:background="#00FFFF" />
