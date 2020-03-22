@@ -62,6 +62,17 @@ public class LoginActivity extends FragmentActivity {
                 jiayunLogin();
             }
         });
+        tvLogin.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    tvLogin.animate().scaleX(1.05f).scaleY(1.2f).setDuration(300).start();
+                } else {
+                    tvLogin.animate().scaleX(1.0f).scaleY(1.0f).setDuration(300).start();
+                }
+            }
+        });
+
     }
 
     private void jiayunLogin() {
