@@ -18,6 +18,7 @@ import com.example.mycloudtv.acache.ACache;
 import com.example.mycloudtv.bean.LoginInfo;
 import com.example.mycloudtv.bean.UserBean;
 import com.example.mycloudtv.util.Constant;
+import com.example.mycloudtv.util.NetWorkUtils;
 import com.example.mycloudtv.util.ThreadManager;
 import com.google.gson.Gson;
 import com.zhouyou.http.EasyHttp;
@@ -56,23 +57,16 @@ public class LoginActivity extends FragmentActivity {
         tvLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!NetWorkUtils.isNetworkConnected(LoginActivity.this)) {
+                    Toast.makeText(LoginActivity.this, R.string.str_network_excption, 500).show();
+                    return;
+                }
                 if (!isNetFinsh) {
                     return;
                 }
                 jiayunLogin();
             }
         });
-        tvLogin.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    tvLogin.animate().scaleX(1.05f).scaleY(1.2f).setDuration(300).start();
-                } else {
-                    tvLogin.animate().scaleX(1.0f).scaleY(1.0f).setDuration(300).start();
-                }
-            }
-        });
-
     }
 
     private void jiayunLogin() {
