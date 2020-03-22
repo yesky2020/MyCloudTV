@@ -61,6 +61,7 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:layout_marginTop="10dp"
+                android:focusable="true"
                 android:gravity="center"
                 android:text="@string/str_input_loging"
                 android:background="@drawable/button_shape"
