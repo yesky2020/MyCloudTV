@@ -25,6 +25,7 @@
         android:singleLine="true"
         android:text="@string/str_exit_btn"
         android:textColor="#ffffff"
+        android:focusable="true"
         android:background="@drawable/exit_shape"
         android:textSize="20sp" />
 
