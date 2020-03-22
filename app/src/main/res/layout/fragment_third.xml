@@ -1,14 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:background="@color/red"
-    android:orientation="vertical">
+    android:background="#303D3C"
+    tools:context=".ManMachineFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="第三个fragment"/>
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/label_man_machine"
+        android:layout_height="60dp"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="2">
+            <TextView
+                android:id="@+id/tv_man_machine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textSize="20sp"
+                android:textColor="#FFFFFF"
+                android:layout_marginStart="50dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true"/>
+        </RelativeLayout>
+
+
+        <Button
+            android:id="@+id/btn_morning_shift"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/str_morning_shift"/>
+        <Button
+            android:id="@+id/btn_night_shift"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/str_night_shift"
+            android:textColor="#FFFFFF"/>
+        <Button
+            android:id="@+id/btn_spectaculars"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/str_spectaculars"
+            android:textColor="#FFFFFF"/>
+        <Button
+            android:id="@+id/btn_rank"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/str_rank"
+            android:textColor="#FFFFFF"
+            android:visibility="gone"/>
+    </LinearLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_man_machine_page"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:nextFocusLeft="@id/llPai"
+        android:layout_below="@id/label_man_machine"
+        android:background="#00FFFF"
+        />
+</RelativeLayout>

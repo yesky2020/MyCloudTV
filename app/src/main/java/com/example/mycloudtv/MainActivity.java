@@ -97,7 +97,7 @@ public class MainActivity extends FragmentActivity {
                 selectView(view.getId());
                 break;
             case R.id.llRenJi:
-                switchFragment(new ThirdFragment()).commit();
+                switchFragment(new ManMachineFragment()).commit();
                 selectView(view.getId());
                 break;
             case R.id.llExit:

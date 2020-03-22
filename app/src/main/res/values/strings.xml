@@ -8,5 +8,9 @@
     <string name="str_network_excption">網絡異常,請重試!</string>
     <string name="str_login_excption">登錄失敗,請重試!</string>
     <string name="str_exit_btn">注 銷</string>
+    <string name="str_morning_shift">早 班</string>
+    <string name="str_night_shift">晚 班</string>
+    <string name="str_rank">排行榜</string>
+    <string name="str_spectaculars">看 板</string>
 </resources>
 
