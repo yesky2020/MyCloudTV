@@ -67,9 +67,20 @@ public class ManMachineFragment extends Fragment {
 
 
     private void initViewPager() {
-        viewContainer = new ArrayList<>();
-        rankFragment = new RankFragment();
-        spectacularsFragment = new SpectacularsFragment();
+        if (viewContainer == null){
+            viewContainer = new ArrayList<>();
+        }else {
+            viewContainer.clear();
+        }
+
+        if (rankFragment == null){
+            rankFragment = new RankFragment();
+        }
+
+        if (spectacularsFragment == null){
+            spectacularsFragment = new SpectacularsFragment();
+        }
+
         viewContainer.add(rankFragment);
         viewContainer.add(spectacularsFragment);
 
@@ -94,11 +105,11 @@ public class ManMachineFragment extends Fragment {
                 selectView(view.getId());
                 break;
             case R.id.btn_spectaculars:
-                viewManMachinePage.setCurrentItem(0);
+                viewManMachinePage.setCurrentItem(1);
                 selectView(view.getId());
                 break;
             case R.id.btn_rank:
-                viewManMachinePage.setCurrentItem(1);
+                viewManMachinePage.setCurrentItem(0);
                 selectView(view.getId());
                 break;
         }
