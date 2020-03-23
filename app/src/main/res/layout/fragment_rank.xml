@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:background="#303D3C">
 
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list_rank"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="40dp"
