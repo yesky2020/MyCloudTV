@@ -13,11 +13,13 @@
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="80dp"
+        <TextClock
+            android:id="@+id/tc_date"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:text="2020-02-18"
+            android:format12Hour="yyyy年M月dd日"
+            android:format24Hour="yyyy年M月dd日"
             android:textColor="@color/white" />
 
         <TextView
@@ -29,12 +31,14 @@
             android:textColor="@color/white"
             android:textSize="@dimen/textTitle" />
 
-        <TextView
-            android:layout_width="80dp"
+        <TextClock
+            android:id="@+id/tc_date1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="16dp"
             android:gravity="right"
-            android:text="16:08:19"
+            android:format24Hour="k:mm:ss"
+            android:format12Hour="aa h:mm:ss"
             android:textColor="@color/white" />
     </LinearLayout>
 
@@ -55,6 +59,7 @@
             android:focusable="true"
             android:nextFocusDown="@id/llChe"
             android:nextFocusRight="@id/fragmentLayout"
+            android:background="@drawable/button_focus_selector"
             android:orientation="horizontal">
 
             <TextView
@@ -85,6 +90,7 @@
             android:nextFocusUp="@id/llPai"
             android:nextFocusDown="@id/llRenJi"
             android:nextFocusRight="@id/fragmentLayout"
+            android:background="@drawable/button_focus_selector"
             android:orientation="horizontal">
 
             <TextView
@@ -115,6 +121,7 @@
             android:nextFocusUp="@id/llChe"
             android:nextFocusDown="@id/llExit"
             android:nextFocusRight="@id/fragmentLayout"
+            android:background="@drawable/button_focus_selector"
             android:orientation="horizontal">
 
             <TextView
@@ -144,6 +151,7 @@
             android:focusable="true"
             android:nextFocusUp="@id/llRenJi"
             android:nextFocusRight="@id/fragmentLayout"
+            android:background="@drawable/button_focus_selector"
             android:orientation="horizontal">
 
             <TextView
