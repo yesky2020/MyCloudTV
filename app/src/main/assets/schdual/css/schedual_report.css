@@ -1,0 +1,167 @@
+body,html{
+	font-family:"Microsoft YaHei";
+	height:100%;
+	background-color:#0d0d0d;
+}
+ul{
+	list-style-type:none;
+	padding:0px 0px 0px 0px;
+}
+a{
+	text-decoration: none; 
+}
+a:link { 
+	color: #000000; 
+	text-decoration: none; 
+} 
+a:visited { 
+	color: #000000; 
+	text-decoration: none; 
+} 
+a:hover { 
+	color: #999999; 
+	text-decoration: none; 
+}
+
+.sr_cent{
+	margin:0 auto;
+	width:98%;
+	height:97%;
+}
+
+.sr_cent_1{
+	color:#65fbfe;
+	height:40%;
+	width:100%;
+}
+.sr_cent_1 div{
+	float:left;
+ 
+}
+.sr_cent_1 .sc_list1{
+	width:48%;
+	background-color:#0b2b38;
+	height:100%;
+}
+
+.sc_list_top{
+	width:100%;
+	margin-top:10px;
+	margin-left:10px;
+	font-weight:bold;
+	height:5%;
+	font-size:18px;
+	color:#65fbfe;
+}
+
+.sc_list_top_table1{
+		width:100%;
+		margin-top:10px;
+		margin-left:10px;
+		height:98%;
+}
+
+.sc_list_top_table1 div{
+	float:left;
+	
+}
+.sc_list_top_table1 .sc_list_top_table2{
+	width:20%;
+	height: 100%
+}
+
+.sc_list_top_table1 .sc_list_top_table3{
+	width:80%;
+	height: 100%;
+}
+.sc_list_top_table2 ul{
+	height: 100%
+}
+.sc_list_top_table2 li{
+	height:8%;
+	
+}
+
+.sta{
+	width: 35px;
+    height: 15px;
+    border-radius: 8px;
+    margin-left: 10px;
+    margin-top: 3px;
+}
+.stalabel{
+	margin-left: 5px;
+}
+ 
+.sc_list_top_table{
+	width:100%;
+	margin-top:10px;
+	margin-left:10px;
+	
+}
+.tab_c{
+	width: 98%;
+    text-align: center;
+    margin-top: 10px;
+    border-collapse: collapse;
+    border: solid 1px #a6a6a6;
+}
+
+.tab_title {
+    word-wrap: break-word;
+    font-size: 16px;
+    height: 40px;
+    background-color: #ffc000;
+    color: #0a2a37;
+}
+.tab_title th{
+	border: solid 2px #a6a6a6;
+}
+
+.tab_cent {
+    word-wrap: break-word;
+    font-size: 14px;
+    height: 40px;
+	color:#65fbf6;
+}
+.tab_cent td{
+	word-wrap: break-word;
+    border: solid 2px #a6a6a6;
+}
+
+.sr_cent_1 .sc_list2{
+	width:1%;
+	height:100%;
+}
+
+.sr_cent_1 .sc_list3{
+	width:51%;
+	height:100%;
+	background-color:#0b2b38;
+}
+
+.sr_cent_2{
+	color:#64dfb1;
+	height:2%;
+	width:100%;
+}
+.pieSty{
+	width: 50%;
+	height: 100%;
+	float: left;
+	margin-top: 10px;
+}
+.sc_list_top_table4{
+	width:100%;
+	margin-top:10px;
+	margin-left:10px;
+	height:90%;
+	
+}
+.sr_cent_3{
+	height:58%;
+	width:100%;
+	background-color:#0b2b38;
+	float:left;
+	color:#65fbf6;
+}

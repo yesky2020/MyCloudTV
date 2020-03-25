@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<title>丹弗科技</title>
+<link href="css/schedual_report.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/echarts.min.js"></script>
+<script type="text/javascript" src="js/schedual_report.js"></script>
+</head>
+<body>
+
+<div class="sr_cent">
+		<div class="sr_cent_1">
+          <div class="sc_list1">
+          		 <div class="sc_list_top"><span>当日分班数据累计</span></div>
+                 <div class="sc_list_top_table">
+                 	<table class="tab_c">
+                    	 
+                    </table>
+                 </div>
+          </div>
+          <div class="sc_list2">&nbsp;</div>
+          <div class="sc_list3">
+                 <div class="sc_list_top"><span>设备时间运行状态时间分布</span></div>
+                 <div class="sc_list_top_table1">
+                 	<div class="sc_list_top_table2">
+                       <ul>
+                       		<li><div class="sta" style="background: red;float: left;"></div><label class="stalabel">告警时间</label></li>
+                            <li></li>
+                            <li><div class="sta" style="background: #f6d422;float: left;"></div><label class="stalabel">待机时间</label></li>
+                            <li></li>
+                            <li><div class="sta" style="background: #22b780;float: left;"></div><label class="stalabel">运行时间</label></li>
+                       </ul>
+                 	</div>
+                    <div class="sc_list_top_table3" id="pieDiv">
+                         
+                         
+                         
+                 	</div>
+                    
+                 </div>
+                 
+                 
+          </div>
+        </div>
+        <div class="sr_cent_2">&nbsp;</div>
+        <div class="sr_cent_3">
+          <div class="sc_list_top"><span>当日加工产量分时段数据</span></div>
+           <div class="sc_list_top_table4" id="histogramDiv">
+                  
+           </div>
+        </div>
+
+</div>
+
+</body>
+
+ <script type="text/javascript">
+ 
+  function androidCallJs(data){
+		  alert("data:"+data)
+		  schedual_report.getData(data)
+   }
+		
+$(document).ready(function(){
+	 //schedual_report.init();
+	 //androidCallJs(data);
+	
+ 
+});
+</script>
+</html>

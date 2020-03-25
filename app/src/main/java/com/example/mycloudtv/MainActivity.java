@@ -88,13 +88,13 @@ public class MainActivity extends FragmentActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.llPai:
-                switchFragment(new FirstFragment()).commit();
+                switchFragment(new ShiftManageFragment()).commit();
                 selectView(view.getId());
-                showWebDialog();
                 break;
             case R.id.llChe:
                 switchFragment(new WorkShopFragment()).commit();
                 selectView(view.getId());
+                //                showWebDialog();
                 break;
             case R.id.llRenJi:
                 switchFragment(new ManMachineFragment()).commit();
