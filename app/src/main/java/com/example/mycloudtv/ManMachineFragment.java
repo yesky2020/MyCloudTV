@@ -16,6 +16,7 @@ import com.example.mycloudtv.machine.SpectacularsFragment;
 import com.example.mycloudtv.machine.adapter.FragmentTabAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -50,6 +51,8 @@ public class ManMachineFragment extends Fragment {
     private ArrayList<Fragment> viewContainer;
 
     private Unbinder unbinder;
+//    private ClickListener listener;
+    private List<ClickListener> listeners = new ArrayList<>();
 
     @Nullable
     @Override
@@ -89,6 +92,12 @@ public class ManMachineFragment extends Fragment {
         viewManMachinePage.setCurrentItem(0);
     }
 
+    public void setListener(ClickListener listener){
+        if (!listeners.contains(listener)){
+            listeners.add(listener);
+        }
+    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -100,16 +109,25 @@ public class ManMachineFragment extends Fragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_morning_shift:
+                for (ClickListener listener: listeners) {
+                    if (listener != null){
+                        listener.morningShiftListener();
+                    }
+                }
                 break;
             case R.id.btn_night_shift:
-                selectView(view.getId());
+                for (ClickListener listener: listeners) {
+                    if (listener != null){
+                        listener.nightShiftListener();
+                    }
+                }
                 break;
             case R.id.btn_spectaculars:
-                viewManMachinePage.setCurrentItem(1);
+                viewManMachinePage.setCurrentItem(0);
                 selectView(view.getId());
                 break;
             case R.id.btn_rank:
-                viewManMachinePage.setCurrentItem(0);
+                viewManMachinePage.setCurrentItem(1);
                 selectView(view.getId());
                 break;
         }
@@ -130,4 +148,9 @@ public class ManMachineFragment extends Fragment {
                 break;
         }
     }
+
+    public interface ClickListener{
+        void morningShiftListener();
+        void nightShiftListener();
+    };
 }

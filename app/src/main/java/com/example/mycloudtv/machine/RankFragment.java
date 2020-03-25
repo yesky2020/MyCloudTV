@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import com.example.mycloudtv.ManMachineFragment;
 import com.example.mycloudtv.R;
 import com.example.mycloudtv.bean.RankBean;
 import com.example.mycloudtv.machine.adapter.RankAdapter;
@@ -40,6 +41,7 @@ public class RankFragment extends Fragment {
     public void onStart() {
         super.onStart();
         initData();
+        initListener();
     }
 
     private void initData() {
@@ -62,5 +64,66 @@ public class RankFragment extends Fragment {
         manager.setOrientation(RecyclerView.VERTICAL);
         listRank.setLayoutManager(manager);
         listRank.setAdapter(rankAdapter);
+    }
+
+    private void initListener() {
+        ((ManMachineFragment) RankFragment.this.getParentFragment()).setListener(new ManMachineFragment.ClickListener() {
+            @Override
+            public void morningShiftListener() {
+                if (!isVisible()){
+                    return;
+                }
+                requestDayData();
+            }
+
+            @Override
+            public void nightShiftListener() {
+                if (!isVisible()){
+                    return;
+                }
+                requestNightData();
+            }
+        });
+    }
+
+    private void requestDayData(){
+        if (mData != null && !mData.isEmpty()){
+            mData.clear();
+        }
+        for (int i = 0; i < 10; i++) {
+            RankBean rankBean = new RankBean();
+            rankBean.setRank(i);
+            rankBean.setName("张三" + i);
+            rankBean.setDoneTimes(new SecureRandom().nextInt(12) + "");
+            rankBean.setFailTimes(new SecureRandom().nextInt(12) + "");
+            rankBean.setPassTimes(new SecureRandom().nextInt(12) + "");
+            rankBean.setPoints(new SecureRandom().nextInt(30) + "");
+            mData.add(rankBean);
+        }
+
+        if (rankAdapter == null){
+            rankAdapter = new RankAdapter(getActivity(), mData);
+        }
+        rankAdapter.notifyDataSetChanged();
+    }
+
+    private void requestNightData(){
+        if (mData != null && !mData.isEmpty()){
+            mData.clear();
+        }
+        for (int i = 0; i < 10; i++) {
+            RankBean rankBean = new RankBean();
+            rankBean.setRank(i);
+            rankBean.setName("李四" + i);
+            rankBean.setDoneTimes(new SecureRandom().nextInt(12) + "");
+            rankBean.setFailTimes(new SecureRandom().nextInt(12) + "");
+            rankBean.setPassTimes(new SecureRandom().nextInt(12) + "");
+            rankBean.setPoints(new SecureRandom().nextInt(30) + "");
+            mData.add(rankBean);
+        }
+        if (rankAdapter == null){
+            rankAdapter = new RankAdapter(getActivity(), mData);
+        }
+        rankAdapter.notifyDataSetChanged();
     }
 }

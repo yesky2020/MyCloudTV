@@ -22,7 +22,7 @@
                 android:id="@+id/tv_man_machine"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/app_name"
+                android:text="人机达成排行榜"
                 android:textSize="20sp"
                 android:textColor="#FFFFFF"
                 android:layout_marginStart="50dp"
