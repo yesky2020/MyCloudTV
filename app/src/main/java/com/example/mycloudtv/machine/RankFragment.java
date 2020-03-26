@@ -44,6 +44,12 @@ public class RankFragment extends Fragment {
         initListener();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((ManMachineFragment) RankFragment.this.getParentFragment()).setSelectView(0);
+    }
+
     private void initData() {
         for (int i = 0; i < 10; i++) {
             RankBean rankBean = new RankBean();

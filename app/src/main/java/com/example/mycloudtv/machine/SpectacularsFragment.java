@@ -57,6 +57,11 @@ public class SpectacularsFragment extends Fragment {
         requestData();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((ManMachineFragment) SpectacularsFragment.this.getParentFragment()).setSelectView(1);
+    }
 
     private void initData() {
         for (int i = 0; i < 10; i++) {
@@ -159,11 +164,12 @@ public class SpectacularsFragment extends Fragment {
             mData.clear();
         }
 
-        getMachineTargetData("", System.currentTimeMillis() + "");
+        getMachineTargetData("", System.currentTimeMillis() + "", MyApplication.getInstance().getUserInfo().data.token);
     }
 
-    private void getMachineTargetData(String scheduleName, String currentTime) {
-        String url = "/plat/andtv/machineTarget?schedule_name=" + scheduleName + "&&current_time=" + currentTime;
+    private void getMachineTargetData(String scheduleName, String currentTime, String token) {
+        String url = "/plat/andtv/machineTarget?schedule_name=" + scheduleName
+                + "&current_time=" + currentTime + "&token=" + token;
         EasyHttp.get(url).baseUrl("https://m.danfoo.com")
                 .readTimeOut(10 * 1000)//局部定义读超时
                 .writeTimeOut(10 * 1000)

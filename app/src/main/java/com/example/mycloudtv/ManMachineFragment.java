@@ -123,30 +123,26 @@ public class ManMachineFragment extends Fragment {
                 }
                 break;
             case R.id.btn_spectaculars:
-                viewManMachinePage.setCurrentItem(0);
-                selectView(view.getId());
+                viewManMachinePage.setCurrentItem(1);
                 break;
             case R.id.btn_rank:
-                viewManMachinePage.setCurrentItem(1);
-                selectView(view.getId());
+                viewManMachinePage.setCurrentItem(0);
                 break;
         }
     }
 
 
-    private void selectView(int viewId) {
-        switch (viewId) {
-            case R.id.btn_spectaculars:
-                tvManMachine.setText("人机达成排行榜");
-                btnRank.setVisibility(View.VISIBLE);
-                btnSpectaculars.setVisibility(View.GONE);
-                break;
-            case R.id.btn_rank:
-                tvManMachine.setText("人机达成看板");
-                btnRank.setVisibility(View.GONE);
-                btnSpectaculars.setVisibility(View.VISIBLE);
-                break;
+    public void setSelectView(int viewId) {
+        if (viewId == 0){
+            tvManMachine.setText("人机达成排行榜");
+            btnRank.setVisibility(View.GONE);
+            btnSpectaculars.setVisibility(View.VISIBLE);
+        }else {
+            tvManMachine.setText("人机达成看板");
+            btnRank.setVisibility(View.VISIBLE);
+            btnSpectaculars.setVisibility(View.GONE);
         }
+
     }
 
     public interface ClickListener{
