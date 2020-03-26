@@ -9,11 +9,10 @@ function schedual_report()
 			myChart = echarts.init(document.getElementById('histogramDiv'));
 		}
 		myChart.showLoading();
-		
 		$.ajax({
 			type: 'GET',
 			//url : "http://192.168.168.168/plat/andtv/checkLogin?mobile_no=13713917858&&passwd=1828",
-			url : "https://m.danfoo.com/plat/andtv/schedualReport",
+			url : "https://m.danfoo.com/plat/andtv/schedualReport?token=b6cb6f0aa97c30681f1c2cb14f9afbd6",
 			async : false,
 			dataType : 'json',
 			contentType: "application/json; charset=utf-8",
@@ -34,23 +33,9 @@ function schedual_report()
 	
 	this.getData=function(data)
 	{
-		alert("msg");
-		if(myChart == null){
-			myChart = echarts.init(document.getElementById('histogramDiv'));
-		}
-		myChart.showLoading();
-		if(data!="")
-		{
-			if(data.code=="OK")
-			{
-				
-				schedual_report.schedualList(data.data);
-				schedual_report.schedualPie(data.data);
-				schedual_report.schedualHistogram(data.data);
-			}
-		}
-		
-		
+		schedual_report.schedualList(data);
+		schedual_report.schedualPie(data);
+		schedual_report.schedualHistogram(data);
 		
 		
 	}
@@ -71,7 +56,6 @@ function schedual_report()
 				tab_cent_html	+=		"<td>"+schedule_name+"</td>";
 				tab_cent_html	+=		"<td>"+current_process_count+"</td>";
 				tab_cent_html	+=		"<td>"+current_cutting_time+"</td>";
-				tab_cent_html	+=		"<td>"+rate+"</td>";
 				tab_cent_html	+=		"<td>"+alarm_state_count+"</td>";
 				tab_cent_html	+=	"</tr>" ;
 				
