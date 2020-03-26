@@ -41,6 +41,12 @@ public class ShiftManageFragment extends Fragment {
         questData("你好");
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+    }
+
     private void questData(String data) {
         webView.loadUrl("javascript:androidCallJs("+data+")");
     }

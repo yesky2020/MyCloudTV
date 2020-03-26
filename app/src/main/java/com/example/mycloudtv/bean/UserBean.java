@@ -59,6 +59,7 @@ public class UserBean implements Serializable {
         public String isdevice;
         public String distribution_pid;
         public String is_monitor;
+        public String token;
         public List<FactoryMapConfigListBean> factoryMapConfigList;
 
         public static class FactoryMapConfigListBean implements Serializable {
