@@ -57,6 +57,7 @@ public class SpectacularAdapter extends RecyclerView.Adapter {
             ((SpectacularHolder) holder).tvMachine.setText("");
             ((SpectacularHolder) holder).tvProgram.setText("");
             ((SpectacularHolder) holder).tvTarget.setText("");
+            ((SpectacularHolder) holder).layout.removeAllViews();
         }
     }
 
@@ -81,6 +82,7 @@ public class SpectacularAdapter extends RecyclerView.Adapter {
             ((SpectacularHolder) holder).tvProgram.setText("程序名称");
             ((SpectacularHolder) holder).tvTarget.setText("目标");
 
+            holder.layout.removeAllViews();
             for (Map.Entry<String, TimeAreaBean> entry : bean.getTime_area().entrySet()) {
                 String key = entry.getKey();
                 if (key != null && !TextUtils.isEmpty(key)) {
@@ -116,6 +118,7 @@ public class SpectacularAdapter extends RecyclerView.Adapter {
             ((SpectacularHolder) holder).tvProgram.setText(bean.getProgram_name());
             ((SpectacularHolder) holder).tvTarget.setText(bean.getTarget_num() + "");
 
+            holder.layout.removeAllViews();
             for (Map.Entry<String, TimeAreaBean> entry : bean.getTime_area().entrySet()) {
                 TimeAreaBean entryValue = entry.getValue();
                 if (entryValue == null) {
