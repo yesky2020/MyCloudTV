@@ -73,11 +73,11 @@ public class SpectacularsFragment extends Fragment {
     private void initData() {
         if (dayShiftList == null){
             dayShiftList = new ArrayList<>();
-            dayShiftList.add(new TargetBean());
+//            dayShiftList.add(new TargetBean());
         }
         if (nightShiftList == null){
             nightShiftList = new ArrayList<>();
-            nightShiftList.add(new TargetBean());
+//            nightShiftList.add(new TargetBean());
         }
         if (spectacularAdapter == null){
             spectacularAdapter = new SpectacularAdapter(getActivity(), dayShiftList);
