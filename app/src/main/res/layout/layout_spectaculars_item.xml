@@ -40,67 +40,11 @@
         android:textSize="20sp"
         android:text="@string/str_rank"
         android:gravity="center"/>
-    <TextView
-        android:id="@+id/tv_time_1"
+    <LinearLayout
+        android:id="@+id/view_time"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="2"
-        android:textColor="#08A6ED"
-        android:textSize="20sp"
-        android:text="@string/str_rank"
-        android:gravity="center"/>
-    <TextView
-        android:id="@+id/tv_time_2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="2"
-        android:textColor="#08A6ED"
-        android:textSize="20sp"
-        android:text="@string/str_rank"
-        android:gravity="center"/>
-    <TextView
-        android:id="@+id/tv_time_3"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="2"
-        android:textColor="#08A6ED"
-        android:textSize="20sp"
-        android:text="@string/str_rank"
-        android:gravity="center"/>
-    <TextView
-        android:id="@+id/tv_time_4"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="2"
-        android:textColor="#08A6ED"
-        android:textSize="20sp"
-        android:text="@string/str_rank"
-        android:gravity="center"/>
-    <TextView
-        android:id="@+id/tv_time_5"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="2"
-        android:textColor="#08A6ED"
-        android:textSize="20sp"
-        android:text="@string/str_rank"
-        android:gravity="center"/>
-    <TextView
-        android:id="@+id/tv_time_6"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="2"
-        android:textColor="#08A6ED"
-        android:textSize="20sp"
-        android:text="@string/str_rank"
-        android:gravity="center"/>
-    <TextView
-        android:id="@+id/tv_time_7"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="2"
-        android:textColor="#08A6ED"
-        android:textSize="20sp"
-        android:text="@string/str_rank"
-        android:gravity="center"/>
+        android:orientation="horizontal"
+        android:layout_weight="1"/>
 </LinearLayout>
+
