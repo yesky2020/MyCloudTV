@@ -28,6 +28,7 @@ import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -42,8 +43,9 @@ public class SpectacularsFragment extends Fragment {
 
     private static final String TAG = "SpectacularsFragment";
 
-    private List<SpectacularBean.DataBean> mData = new ArrayList<>();
-    private Map<String, TargetBean> data;
+//    private List<SpectacularBean.DataBean> mData = new ArrayList<>();
+    private List<TargetBean> dayShiftList;
+    private List<TargetBean> nightShiftList;
     private SpectacularAdapter spectacularAdapter;
     private RecyclerView listRank;
 
@@ -70,11 +72,14 @@ public class SpectacularsFragment extends Fragment {
     }
 
     private void initData() {
-        if (mData == null){
-            mData = new ArrayList<>();
+        if (dayShiftList == null){
+            dayShiftList = new ArrayList<>();
+        }
+        if (nightShiftList == null){
+            nightShiftList = new ArrayList<>();
         }
         if (spectacularAdapter == null){
-            spectacularAdapter = new SpectacularAdapter(getActivity(), mData);
+            spectacularAdapter = new SpectacularAdapter(getActivity(), dayShiftList);
         }
 
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
@@ -84,11 +89,13 @@ public class SpectacularsFragment extends Fragment {
     }
 
     public void requestDayData(){
-
+        spectacularAdapter.setData(dayShiftList);
+        spectacularAdapter.notifyDataSetChanged();
     }
 
     public void requestNightData(){
-
+        spectacularAdapter.setData(nightShiftList);
+        spectacularAdapter.notifyDataSetChanged();
     }
 
     private void initListener() {
@@ -112,9 +119,6 @@ public class SpectacularsFragment extends Fragment {
     }
 
     private void requestData(){
-        if (mData != null && !mData.isEmpty()){
-            mData.clear();
-        }
 
         getMachineTargetData("", getCurrentTime(), MyApplication.getInstance().getUserInfo().data.token);
     }
@@ -138,27 +142,51 @@ public class SpectacularsFragment extends Fragment {
                             Log.d(TAG, s);
 //                            Gson gson = new Gson();
                             Gson gson = buildGson();
-                            SpectacularBean2 bean2 = gson.fromJson(s, SpectacularBean2.class);
+                            SpectacularBean bean2 = gson.fromJson(s, SpectacularBean.class);
                             if (bean2 != null && bean2.getData() != null){
-                                for (SpectacularBean2.DataBean targetBean : bean2.getData()){
+                                List<SpectacularBean.DataBean> mData = new ArrayList<>();
+                                for (SpectacularBean.DataBean targetBean : bean2.getData()){
                                     if (targetBean != null){
-//                                        String target_json = targetBean.getTarget_statistics_json();
-//                                        if (target_json != null && !TextUtils.isEmpty(target_json)){
-//                                            Map<String, TargetBean> beanMap = parseData(target_json);
-//
-//                                        }
-//                                        mData.add(targetBean);
+                                        mData.add(targetBean);
                                     }
                                 }
-                                if (data != null){
-                                    spectacularAdapter.setData(mData, data);
-                                }
+                                parseData(mData);
                             }
                         } catch (Exception e) {
                             Log.d(TAG, e.getMessage());
                         }
                     }
                 });
+    }
+
+    private void parseData(List<SpectacularBean.DataBean> mData) {
+        if (mData == null) {
+            return;
+        }
+        for (SpectacularBean.DataBean targetBean : mData) {
+            String target_json = targetBean.getTarget_statistics_json();
+            if (target_json != null && !TextUtils.isEmpty(target_json)) {
+                Map<String, TargetBean> beanMap = parseData(target_json);
+
+                for (TargetBean bean : beanMap.values()) {
+                    if (bean != null) {
+                        if (TextUtils.equals("白班", targetBean.getSchedule_name())) {
+                            dayShiftList.add(bean);
+                        } else {
+                            nightShiftList.add(bean);
+                        }
+                    }
+                }
+            }
+        }
+        displayView();
+    }
+
+    private void displayView(){
+        if (spectacularAdapter != null){
+            spectacularAdapter.setData(dayShiftList);
+            spectacularAdapter.notifyDataSetChanged();
+        }
     }
 
     private String getCurrentTime(){
@@ -173,6 +201,10 @@ public class SpectacularsFragment extends Fragment {
         return gson.fromJson(data, type);
     }
 
+    /**
+     * 自定义TypeAdapter，避免String类型的数据返回格式有问题
+     * @return
+     */
     private Gson buildGson(){
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(String.class, new StringDefault0Adapter())

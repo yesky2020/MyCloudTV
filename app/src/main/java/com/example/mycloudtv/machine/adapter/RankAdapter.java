@@ -9,7 +9,11 @@ import android.widget.TextView;
 
 import com.example.mycloudtv.R;
 import com.example.mycloudtv.bean.RankBean;
+import com.example.mycloudtv.bean.RankDataBean;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -18,11 +22,16 @@ import androidx.recyclerview.widget.RecyclerView;
 public class RankAdapter extends RecyclerView.Adapter {
 
     private Context mContext;
-    private List<RankBean> mData;
+    private List<RankDataBean> mData;
 
-    public RankAdapter(Context mContext, List<RankBean> mData) {
+    public RankAdapter(Context mContext, List<RankDataBean> mData) {
         this.mContext = mContext;
         this.mData = mData;
+    }
+
+    public void setData(List<RankDataBean> dataBeans){
+        mData = dataBeans;
+        sortData(mData);
     }
 
     @NonNull
@@ -37,7 +46,7 @@ public class RankAdapter extends RecyclerView.Adapter {
         if (mData == null || mData.isEmpty()){
             return;
         }
-        RankBean rankBean = mData.get(position);
+        RankDataBean rankBean = mData.get(position);
         if (rankBean != null ){
             setTextAndStatus(position, (RankListHolder) holder, rankBean);
         }else {
@@ -59,7 +68,7 @@ public class RankAdapter extends RecyclerView.Adapter {
         }
     }
 
-    private void setTextAndStatus(int position, RankListHolder holder, RankBean rankBean){
+    private void setTextAndStatus(int position, RankListHolder holder, RankDataBean rankBean){
         if (position == 0){
             ((RankListHolder) holder).tvName.setText("员工");
             ((RankListHolder) holder).tvRank.setText("排名");
@@ -82,12 +91,12 @@ public class RankAdapter extends RecyclerView.Adapter {
             holder.tvFailTimes.setTextColor(Color.parseColor("#FFFFFF"));
             holder.tvPoints.setTextColor(Color.parseColor("#FFFFFF"));
         }else {
-            ((RankListHolder) holder).tvName.setText(rankBean.getName());
-            ((RankListHolder) holder).tvRank.setText((position) + "");
-            ((RankListHolder) holder).tvDoneTimes.setText(rankBean.getDoneTimes());
-            ((RankListHolder) holder).tvPassTimes.setText(rankBean.getPassTimes());
-            ((RankListHolder) holder).tvFailTimes.setText(rankBean.getFailTimes());
-            ((RankListHolder) holder).tvPoints.setText(rankBean.getPoints());
+            ((RankListHolder) holder).tvName.setText(rankBean.getStaff());
+            ((RankListHolder) holder).tvRank.setText(rankBean.getOrder_id() + "");
+            ((RankListHolder) holder).tvDoneTimes.setText(rankBean.getReach_count() + "");
+            ((RankListHolder) holder).tvPassTimes.setText(rankBean.getQualified_count() + "");
+            ((RankListHolder) holder).tvFailTimes.setText(rankBean.getFailurego_count() + "");
+            ((RankListHolder) holder).tvPoints.setText(rankBean.getRank_score() + "");
 
             holder.tvName.setBackground(mContext.getDrawable(R.drawable.rank_list_item_shape));
             holder.tvRank.setBackground(mContext.getDrawable(R.drawable.rank_list_item_shape));
@@ -122,5 +131,18 @@ public class RankAdapter extends RecyclerView.Adapter {
             tvDoneTimes = itemView.findViewById(R.id.tv_done_times);
             tvPoints = itemView.findViewById(R.id.tv_employee_points);
         }
+    }
+
+    private void sortData(List<RankDataBean> beans){
+        Collections.sort(beans, new Comparator<RankDataBean>() {
+            @Override
+            public int compare(RankDataBean o1, RankDataBean o2) {
+                int a = o1.getOrder_id() - o2.getOrder_id();
+                if (a == 0){
+                    return (o1.getOrder_id() - o2.getOrder_id());
+                }
+                return a;
+            }
+        });
     }
 }
