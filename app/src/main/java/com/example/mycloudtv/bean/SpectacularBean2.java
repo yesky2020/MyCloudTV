@@ -1,17 +1,15 @@
 package com.example.mycloudtv.bean;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-public class SpectacularBean implements Serializable {
-
+public class SpectacularBean2 {
     private int status;
     private String code;
     private Object message;
     private int duration;
     private Object errorCode;
-    private List<DataBean> data;
+    private List<SpectacularBean2.DataBean> data;
 
     public int getStatus() {
         return status;
@@ -53,11 +51,11 @@ public class SpectacularBean implements Serializable {
         this.errorCode = errorCode;
     }
 
-    public List<DataBean> getData() {
+    public List<SpectacularBean2.DataBean> getData() {
         return data;
     }
 
-    public void setData(List<DataBean> data) {
+    public void setData(List<SpectacularBean2.DataBean> data) {
         this.data = data;
     }
 
@@ -72,7 +70,7 @@ public class SpectacularBean implements Serializable {
         private String schedule_name;
         private String schedule_start_time;
         private String schedule_end_time;
-        private String target_statistics_json;
+        private Map<String, TargetBean> target_statistics_json;
 
         public String getSchedul_targert_id() {
             return schedul_targert_id;
@@ -154,11 +152,11 @@ public class SpectacularBean implements Serializable {
             this.schedule_end_time = schedule_end_time;
         }
 
-        public String getTarget_statistics_json() {
+        public Map<String, TargetBean> getTarget_statistics_json() {
             return target_statistics_json;
         }
 
-        public void setTarget_statistics_json(String target_statistics_json) {
+        public void setTarget_statistics_json(Map<String, TargetBean> target_statistics_json) {
             this.target_statistics_json = target_statistics_json;
         }
     }

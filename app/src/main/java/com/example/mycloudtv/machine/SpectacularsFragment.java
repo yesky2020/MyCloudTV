@@ -1,31 +1,36 @@
 package com.example.mycloudtv.machine;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.example.mycloudtv.MainActivity;
 import com.example.mycloudtv.ManMachineFragment;
 import com.example.mycloudtv.MyApplication;
 import com.example.mycloudtv.R;
 import com.example.mycloudtv.bean.SpectacularBean;
-import com.example.mycloudtv.bean.UserBean;
-import com.example.mycloudtv.bean.VersionBean;
+import com.example.mycloudtv.bean.SpectacularBean2;
+import com.example.mycloudtv.bean.TargetBean;
+import com.example.mycloudtv.bean.TimeAreaBean;
 import com.example.mycloudtv.machine.adapter.SpectacularAdapter;
-import com.example.mycloudtv.util.Constant;
+import com.example.mycloudtv.util.StringDefault0Adapter;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.zhouyou.http.EasyHttp;
 import com.zhouyou.http.callback.SimpleCallBack;
 import com.zhouyou.http.exception.ApiException;
 
+import java.lang.reflect.Type;
 import java.security.SecureRandom;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.Locale;
+import java.util.Map;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -37,7 +42,8 @@ public class SpectacularsFragment extends Fragment {
 
     private static final String TAG = "SpectacularsFragment";
 
-    private List<SpectacularBean> mData = new ArrayList<>();
+    private List<SpectacularBean.DataBean> mData = new ArrayList<>();
+    private Map<String, TargetBean> data;
     private SpectacularAdapter spectacularAdapter;
     private RecyclerView listRank;
 
@@ -64,19 +70,8 @@ public class SpectacularsFragment extends Fragment {
     }
 
     private void initData() {
-        for (int i = 0; i < 10; i++) {
-            SpectacularBean spectacularBean = new SpectacularBean();
-            spectacularBean.setEmployeeName("张三" + i);
-            spectacularBean.setMachine("A0" + i);
-            spectacularBean.setProgramName("P00T" + i + "2038");
-            spectacularBean.setTarget(new SecureRandom().nextInt(30) + "");
-            spectacularBean.setTime_1(new SecureRandom().nextInt(12) + "");
-            spectacularBean.setTime_2(new SecureRandom().nextInt(15) + "");
-            spectacularBean.setTime_3(new SecureRandom().nextInt(20) + "");
-            spectacularBean.setTime_4(new SecureRandom().nextInt(12) + "");
-            spectacularBean.setTime_5(new SecureRandom().nextInt(15) + "");
-            spectacularBean.setTime_6(new SecureRandom().nextInt(20) + "");
-            mData.add(spectacularBean);
+        if (mData == null){
+            mData = new ArrayList<>();
         }
         if (spectacularAdapter == null){
             spectacularAdapter = new SpectacularAdapter(getActivity(), mData);
@@ -89,54 +84,11 @@ public class SpectacularsFragment extends Fragment {
     }
 
     public void requestDayData(){
-        if (mData != null && !mData.isEmpty()){
-            mData.clear();
-        }
-        for (int i = 0; i < 10; i++) {
-            SpectacularBean spectacularBean = new SpectacularBean();
-            spectacularBean.setEmployeeName("张三" + i);
-            spectacularBean.setMachine("A0" + i);
-            spectacularBean.setProgramName("P00T" + i + "2038");
-            spectacularBean.setTarget(new SecureRandom().nextInt(30) + "");
-            spectacularBean.setTime_1(new SecureRandom().nextInt(12) + "");
-            spectacularBean.setTime_2(new SecureRandom().nextInt(15) + "");
-            spectacularBean.setTime_3(new SecureRandom().nextInt(20) + "");
-            spectacularBean.setTime_4(new SecureRandom().nextInt(12) + "");
-            spectacularBean.setTime_5(new SecureRandom().nextInt(15) + "");
-            spectacularBean.setTime_6(new SecureRandom().nextInt(20) + "");
-            mData.add(spectacularBean);
-        }
-        if (spectacularAdapter == null){
-            spectacularAdapter = new SpectacularAdapter(getActivity(), mData);
-        }
 
-        spectacularAdapter.notifyDataSetChanged();
     }
 
     public void requestNightData(){
-        if (mData != null && !mData.isEmpty()){
-            mData.clear();
-        }
-        for (int i = 0; i < 10; i++) {
-            SpectacularBean spectacularBean = new SpectacularBean();
-            spectacularBean.setEmployeeName("李四" + i);
-            spectacularBean.setMachine("B0" + i);
-            spectacularBean.setProgramName("P00T" + i + "2038");
-            spectacularBean.setTarget(new SecureRandom().nextInt(30) + "");
-            spectacularBean.setTime_1(new SecureRandom().nextInt(12) + "");
-            spectacularBean.setTime_2(new SecureRandom().nextInt(15) + "");
-            spectacularBean.setTime_3(new SecureRandom().nextInt(20) + "");
-            spectacularBean.setTime_4(new SecureRandom().nextInt(12) + "");
-            spectacularBean.setTime_5(new SecureRandom().nextInt(15) + "");
-            spectacularBean.setTime_6(new SecureRandom().nextInt(20) + "");
-            mData.add(spectacularBean);
-        }
 
-        if (spectacularAdapter == null){
-            spectacularAdapter = new SpectacularAdapter(getActivity(), mData);
-        }
-
-        spectacularAdapter.notifyDataSetChanged();
     }
 
     private void initListener() {
@@ -164,7 +116,7 @@ public class SpectacularsFragment extends Fragment {
             mData.clear();
         }
 
-        getMachineTargetData("", System.currentTimeMillis() + "", MyApplication.getInstance().getUserInfo().data.token);
+        getMachineTargetData("", getCurrentTime(), MyApplication.getInstance().getUserInfo().data.token);
     }
 
     private void getMachineTargetData(String scheduleName, String currentTime, String token) {
@@ -184,10 +136,47 @@ public class SpectacularsFragment extends Fragment {
                     public void onSuccess(String s) {
                         try {
                             Log.d(TAG, s);
+//                            Gson gson = new Gson();
+                            Gson gson = buildGson();
+                            SpectacularBean2 bean2 = gson.fromJson(s, SpectacularBean2.class);
+                            if (bean2 != null && bean2.getData() != null){
+                                for (SpectacularBean2.DataBean targetBean : bean2.getData()){
+                                    if (targetBean != null){
+//                                        String target_json = targetBean.getTarget_statistics_json();
+//                                        if (target_json != null && !TextUtils.isEmpty(target_json)){
+//                                            Map<String, TargetBean> beanMap = parseData(target_json);
+//
+//                                        }
+//                                        mData.add(targetBean);
+                                    }
+                                }
+                                if (data != null){
+                                    spectacularAdapter.setData(mData, data);
+                                }
+                            }
                         } catch (Exception e) {
-
+                            Log.d(TAG, e.getMessage());
                         }
                     }
                 });
+    }
+
+    private String getCurrentTime(){
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
+        Date date = new Date(System.currentTimeMillis());
+        return format.format(date);
+    }
+
+    private Map<String, TargetBean> parseData(String data){
+        Gson gson = new Gson();
+        Type type = new TypeToken<Map<String,TargetBean>>(){}.getType();
+        return gson.fromJson(data, type);
+    }
+
+    private Gson buildGson(){
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(String.class, new StringDefault0Adapter())
+                .create();
+        return gson;
     }
 }

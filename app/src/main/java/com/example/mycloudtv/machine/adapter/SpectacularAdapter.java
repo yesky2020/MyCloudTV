@@ -9,8 +9,10 @@ import android.widget.TextView;
 
 import com.example.mycloudtv.R;
 import com.example.mycloudtv.bean.SpectacularBean;
+import com.example.mycloudtv.bean.TargetBean;
 
 import java.util.List;
+import java.util.Map;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,11 +20,24 @@ import androidx.recyclerview.widget.RecyclerView;
 public class SpectacularAdapter extends RecyclerView.Adapter {
 
     private Context mContext;
-    private List<SpectacularBean> data;
+    private List<SpectacularBean.DataBean> data;
+    private Map<String, TargetBean> map;
 
-    public SpectacularAdapter(Context mContext, List<SpectacularBean> data) {
+    public SpectacularAdapter(Context mContext, List<SpectacularBean.DataBean> data) {
         this.mContext = mContext;
         this.data = data;
+    }
+
+    public SpectacularAdapter(Context mContext, List<SpectacularBean.DataBean> data, Map<String, TargetBean> map) {
+        this.mContext = mContext;
+        this.data = data;
+        this.map = map;
+    }
+
+    public void setData(List<SpectacularBean.DataBean> data, Map<String, TargetBean> map){
+        this.data = data;
+        this.map = map;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -35,11 +50,11 @@ public class SpectacularAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        if (data == null){
+        if (data == null || map == null){
             return;
         }
 
-        SpectacularBean bean = data.get(position);
+        SpectacularBean.DataBean bean = data.get(position);
         if (bean != null){
             setText(position, (SpectacularHolder) holder, bean);
         }else {
@@ -65,7 +80,7 @@ public class SpectacularAdapter extends RecyclerView.Adapter {
         }
     }
 
-    private void setText(int position, SpectacularHolder holder, SpectacularBean bean){
+    private void setText(int position, SpectacularHolder holder, SpectacularBean.DataBean bean){
         if (position == 0){
             ((SpectacularHolder) holder).tvName.setText("员工");
             ((SpectacularHolder) holder).tvMachine.setText("机床");
@@ -100,16 +115,16 @@ public class SpectacularAdapter extends RecyclerView.Adapter {
             holder.tvTime5.setTextColor(Color.parseColor("#FFFFFF"));
             holder.tvTime6.setTextColor(Color.parseColor("#FFFFFF"));
         }else {
-            ((SpectacularHolder) holder).tvName.setText(bean.getEmployeeName());
-            ((SpectacularHolder) holder).tvMachine.setText(bean.getMachine());
-            ((SpectacularHolder) holder).tvProgram.setText(bean.getProgramName());
-            ((SpectacularHolder) holder).tvTarget.setText(bean.getTarget());
-            ((SpectacularHolder) holder).tvTime1.setText(bean.getTime_1());
-            ((SpectacularHolder) holder).tvTime2.setText(bean.getTime_2());
-            ((SpectacularHolder) holder).tvTime3.setText(bean.getTime_3());
-            ((SpectacularHolder) holder).tvTime4.setText(bean.getTime_4());
-            ((SpectacularHolder) holder).tvTime5.setText(bean.getTime_5());
-            ((SpectacularHolder) holder).tvTime6.setText(bean.getTime_6());
+//            ((SpectacularHolder) holder).tvName.setText(bean.getEmployeeName());
+//            ((SpectacularHolder) holder).tvMachine.setText(bean.getMachine());
+//            ((SpectacularHolder) holder).tvProgram.setText(bean.getProgramName());
+//            ((SpectacularHolder) holder).tvTarget.setText(bean.getTarget());
+//            ((SpectacularHolder) holder).tvTime1.setText(bean.getTime_1());
+//            ((SpectacularHolder) holder).tvTime2.setText(bean.getTime_2());
+//            ((SpectacularHolder) holder).tvTime3.setText(bean.getTime_3());
+//            ((SpectacularHolder) holder).tvTime4.setText(bean.getTime_4());
+//            ((SpectacularHolder) holder).tvTime5.setText(bean.getTime_5());
+//            ((SpectacularHolder) holder).tvTime6.setText(bean.getTime_6());
 
             holder.tvName.setBackground(mContext.getDrawable(R.drawable.rank_list_item_shape));
             holder.tvMachine.setBackground(mContext.getDrawable(R.drawable.rank_list_item_shape));
