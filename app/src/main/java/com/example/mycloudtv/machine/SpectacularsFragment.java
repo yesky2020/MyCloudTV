@@ -164,19 +164,31 @@ public class SpectacularsFragment extends Fragment {
         if (mData == null) {
             return;
         }
+        int index = 0;
         for (SpectacularBean.DataBean targetBean : mData) {
             String target_json = targetBean.getTarget_statistics_json();
             if (target_json != null && !TextUtils.isEmpty(target_json)) {
                 Map<String, TargetBean> beanMap = parseData(target_json);
-
-                for (TargetBean bean : beanMap.values()) {
+                for (Map.Entry<String, TargetBean> entry : beanMap.entrySet()) {
+                    TargetBean bean = entry.getValue();
                     if (bean != null) {
                         if (TextUtils.equals("白班", targetBean.getSchedule_name())) {
+                            if (index == 0){
+                                TargetBean emptyBean = new TargetBean();
+                                emptyBean.setTime_area(bean.getTime_area());
+                                dayShiftList.add(emptyBean);
+                            }
                             dayShiftList.add(bean);
                         } else {
+                            if (index == 0){
+                                TargetBean emptyBean = new TargetBean();
+                                emptyBean.setTime_area(bean.getTime_area());
+                                dayShiftList.add(emptyBean);
+                            }
                             nightShiftList.add(bean);
                         }
                     }
+                    index++;
                 }
             }
         }
